@@ -1,0 +1,5 @@
+#!/bin/bash
+#
+# run rails app locally
+
+rails server -b $IP -p $PORT
