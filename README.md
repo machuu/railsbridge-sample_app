@@ -1,4 +1,5 @@
 # Ruby on Rails Tutorial sample application
+Last deploy: [Heroku: Sample App](https://gentle-coast-14233.herokuapp.com/)
 
 This is the sample application for
 [*Ruby on Rails Tutorial:
