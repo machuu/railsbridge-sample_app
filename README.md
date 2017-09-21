@@ -14,6 +14,44 @@ is available jointly under the MIT License and the Beerware License. See
 
 ## Getting started
 
+### Cloud 9 Prep
+Some extra steps to get setup in a fresh Cloud 9 workspace
+
+Install necessary packages
+
+```
+rvm install 2.3.0
+gem install rails -v 5.1.2
+```
+
+### Heroku
+
+Log in to Heroku
+
+```
+$ heroku login
+Enter your Heroku credentials:
+Email: matt@hoover.ml
+Password: ************
+Logged in as matt@hoover.ml
+```
+
+Add existing Heroku remote to git config
+
+**.git/config**
+
+```
+.
+.
+[remote "heroku"]
+        url = https://git.heroku.com/<heroku_name>.git
+        fetch = +refs/heads/*:refs/remotes/heroku/*
+.
+.
+```
+
+## Remaining config
+
 To get started with the app, clone the repo and then install the needed gems:
 
 ```
