@@ -1,1 +1,34 @@
-<%= @user.name %>, <%= @user.email %>
+<table>
+  <tr>
+    <td>
+      Name:
+    </td>
+    <td>
+      <%= @user.name %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Email:
+    </td>
+    <td>
+      <%= @user.email %>
+    </td>
+  </tr>
+    <tr>
+    <td>
+      Created at:
+    </td>
+    <td>
+      <%= @user.created_at %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Updated at:
+    </td>
+    <td>
+      <%= @user.updated_at %>
+    </td>
+  </tr>
+</table>
