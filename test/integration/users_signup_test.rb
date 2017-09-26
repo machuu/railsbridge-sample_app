@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
-  test "invalid signup does not create new user" do
+  test "invalid signup" do
     get signup_path
     assert_no_difference 'User.count' do
       post signup_path, params: { user: { name: "",
