@@ -9,4 +9,8 @@ class ActiveSupport::TestCase
   fixtures :all
   include ApplicationHelper
 
+  # Check if user is logged in
+  def is_logged_in?
+    !session[:user_id].nil?
+  end
 end
