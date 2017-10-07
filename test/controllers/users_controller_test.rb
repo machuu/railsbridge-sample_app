@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
-    @user = users(:testing)
+    @user = users(:test_user_1)
   end
 
   test "should get signup" do
