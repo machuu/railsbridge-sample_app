@@ -2,6 +2,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
+    @admin = users(:test_admin_1)
     @user = users(:test_user_1)
     @another_user = users(:test_user_2)
   end
@@ -64,5 +65,12 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
       delete user_path(@another_user)
     end
     assert_redirected_to root_url
+  end
+
+  test "should perform destroy action when logged in as admin" do
+    log_in_as(@admin)
+    assert_difference 'User.count', -1 do
+      delete user_path(@another_user)
+    end
   end
 end
