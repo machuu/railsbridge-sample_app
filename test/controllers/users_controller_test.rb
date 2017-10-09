@@ -47,4 +47,14 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert flash.empty?
     assert_redirected_to root_url
   end
+
+  test "should not allow the admin attribute to be edited via the wweb" do
+    log_in_as(@another_user)
+    assert_not @another_user.admin?
+    patch user_path(@another_user), params: {
+                                    user: { password: 'password',
+                                            password_confirmation: 'password',
+                                            admin: true } }
+    assert_not @another_user.reload.admin?
+  end
 end
