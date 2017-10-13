@@ -14,6 +14,7 @@ class UserMailerTest < ActionMailer::TestCase
   end
 
   test "password_reset" do
+    skip "Wait until Chapter 12 to do Password Reset"
     mail = UserMailer.password_reset
     assert_equal "Password reset", mail.subject
     assert_equal ["to@example.org"], mail.to
