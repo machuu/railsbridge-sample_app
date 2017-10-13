@@ -4,11 +4,16 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page:     params[:page],
+                                                  per_page: params[:per_page])
   end
 
   def show
     @user = User.find(params[:id])
+    unless @user.activated?
+      flash[:info] = "Account for '#{@user.email}'' is not activated"
+      redirect_to root_url
+    end
   end
 
   def new
