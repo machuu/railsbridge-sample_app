@@ -32,4 +32,25 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
       end
     end
   end
+
+  test "non-admin index does not display unactivated users" do
+    log_in_as(@user)
+
+    # pagination uses default User order
+    # so grab a low number to ensure it's on the first page
+    @deactivate_user = User.fourth
+
+    # Check that activated user is displayed
+    get users_path
+    assert_template 'users/index'
+    assert_select 'a[href=?]', user_path(@deactivate_user), text: @deactivate_user.name
+
+    # Mark second user as not activated
+    @deactivate_user.update_attribute(:activated, false)
+
+    # Check that de-activated user is not displayed
+    get users_path
+    assert_template 'users/index'
+    assert_select 'a[href=?]', user_path(@deactivate_user), count: 0
+  end
 end
