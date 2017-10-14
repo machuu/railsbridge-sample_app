@@ -1,4 +1,9 @@
 class PasswordResetsController < ApplicationController
+  # Before edit or update, identify user by `params[:id]`
+  # Note: `params[:id]` is the reset token itself
+  before_action :get_user,   only: [:edit, :update]
+  before_action :valid_user, only: [:edit, :update]
+
   def new
   end
 
@@ -17,4 +22,21 @@ class PasswordResetsController < ApplicationController
 
   def edit
   end
+
+  private
+
+    ## Before Filters
+
+    def get_user
+      @user = User.find_by(email: params[:email])
+    end
+
+    # Confirms this user is valid
+    def valid_user
+      unless (@user &&
+              @user.activated? &&
+              @user.authenticated?(:reset, params[:id]))
+        redirect_to root_url
+      end
+    end
 end
