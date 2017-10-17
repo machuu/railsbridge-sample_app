@@ -8,7 +8,7 @@ test_admin_1:
 
 <% 50.times do |n| %>
 test_user_<%= n %>:
-  name: <%= "Testing User#{n}" %>
+  name: <%= "Testing User #{n}" %>
   email: <%= "test_user_#{n}@example.com" %>
   password_digest: <%= User.digest('password') %>
   activated: true
