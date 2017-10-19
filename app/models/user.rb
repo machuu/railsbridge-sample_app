@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :microposts, dependent: :destroy
+
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   before_create :create_activation_digest
@@ -67,6 +69,11 @@ class User < ApplicationRecord
   # Forgt user by clearing `remember_digest`
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # Defines a proto-feed of microposts on logged in homepage
+  def feed
+    Micropost.where("user_id = ?", id)
   end
 
   private

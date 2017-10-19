@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
     unless @user.activated?
       flash[:info] = "Account for '#{@user.email}'' is not activated"
       redirect_to root_url
@@ -60,14 +61,6 @@ class UsersController < ApplicationController
                                    :email,
                                    :password,
                                    :password_confirmation)
-    end
-
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in to view this page"
-        redirect_to login_url
-      end
     end
 
     def correct_user

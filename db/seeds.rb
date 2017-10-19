@@ -14,6 +14,17 @@ User.create!(name:  "Example User",
              activated: true,
              activated_at: Time.zone.now)
 
+users = User.order(:created_at).take(6)
+50.times do
+  users.each do |user|
+    content = Faker::Lorem.sentence(5)
+    created_time = Time.at(rand * 1.years.ago.to_i)
+    micropost = user.microposts.create!(content: content)
+    micropost.created_at = created_time
+    micropost.save
+  end
+end
+
 99.times do |n|
   name = Faker::Name.name
   email = "user-#{n+1}@example.com"
