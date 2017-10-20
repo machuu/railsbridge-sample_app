@@ -81,7 +81,7 @@ class User < ApplicationRecord
 
   # Defines a proto-feed of microposts on logged in homepage
   def feed
-    Micropost.where("user_id = ?", id)
+    Micropost.where("user_id IN (?) or user_id = ?", following_ids, id)
   end
 
   ## Follow methods
