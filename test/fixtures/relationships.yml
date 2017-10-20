@@ -1,0 +1,15 @@
+one_follows_two:
+  follower: test_user_1
+  followed: test_user_2
+
+one_follows_three:
+  follower: test_user_1
+  followed: test_user_3
+
+two_follows_one:
+  follower: test_user_2
+  followed: test_user_1
+
+three_follows_one:
+  follower: test_user_3
+  followed: test_user_1
