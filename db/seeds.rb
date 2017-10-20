@@ -27,8 +27,8 @@ User.create!(name:  "Example User",
 end
 
 users = User.order(:created_at).take(6)
-50.times do
-  users.each do |user|
+users.each do |user|
+  50.times do
     content = Faker::Lorem.sentence(5)
     created_time = Time.at(rand * 1.years.ago.to_i)
     micropost = user.microposts.create!(content: content)
