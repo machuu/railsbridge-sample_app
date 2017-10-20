@@ -14,9 +14,21 @@ User.create!(name:  "Example User",
              activated: true,
              activated_at: Time.zone.now)
 
+99.times do |n|
+  name = Faker::Name.name
+  email = "example-#{n+1}@railstutorial.org"
+  password = "password"
+  User.create!(name:  name,
+               email: email,
+               password:              password,
+               password_confirmation: password,
+               activated: true,
+               activated_at: Time.zone.now)
+end
+
 users = User.order(:created_at).take(6)
-50.times do
-  users.each do |user|
+users.each do |user|
+  50.times do
     content = Faker::Lorem.sentence(5)
     created_time = Time.at(rand * 1.years.ago.to_i)
     micropost = user.microposts.create!(content: content)
@@ -25,14 +37,10 @@ users = User.order(:created_at).take(6)
   end
 end
 
-99.times do |n|
-  name = Faker::Name.name
-  email = "user-#{n+1}@example.com"
-  password = "password"
-  User.create!(name:  name,
-               email: email,
-               password:              password,
-               password_confirmation: password,
-               activated: true,
-               activated_at: Time.zone.now)
+# Following relationships
+users = User.all
+users.each do |user|
+  users.shuffle.take(rand(1..( User.count / 2 ))).each do |random_user|
+    user.follow(random_user) unless (user == random_user)
+  end
 end
