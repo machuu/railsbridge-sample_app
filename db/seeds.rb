@@ -37,3 +37,10 @@ users.each do |user|
   end
 end
 
+# Following relationships
+users = User.all
+users.each do |user|
+  users.shuffle.take(rand(1..( User.count / 2 ))).each do |random_user|
+    user.follow(random_user) unless (user == random_user)
+  end
+end
